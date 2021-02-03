@@ -7,6 +7,13 @@ import {
 } from 'react-router-dom'
 
 import { Navbar } from './app/Navbar'
+import { AddPostForm } from './features/posts/AddPostForm'
+import { PostList } from './features/posts/PostList'
+import { SinglePostPage } from './features/posts/SinglePostPage'
+import { EditPostForm } from './features/posts/EditPostForm'
+import { UserPage } from './features/users/UserPage';
+import { UsersList } from './features/users/UsersList';
+import { NotificationsList } from './features/notifications/NotificationsList'
 
 function App() {
   return (
@@ -18,11 +25,17 @@ function App() {
             exact
             path="/"
             render={() => (
-              <section>
-                <h2>Welcome to the Redux Essentials example app!</h2>
-              </section>
+              <React.Fragment>
+                <AddPostForm />
+                <PostList />
+              </React.Fragment>
             )}
           />
+          <Route exact path={'/posts/:postId'} component={SinglePostPage} />
+          <Route exact path={'/editPost/:postId'} component={EditPostForm} />
+          <Route exact path={"/user/:userId"} component={UserPage} />
+          <Route exact path={"/users"} component={UsersList} />
+          <Route exact path={'/notifications'} component={NotificationsList}/>
           <Redirect to="/" />
         </Switch>
       </div>
